@@ -1,6 +1,7 @@
 import p5 from "p5";
 import "./style.css";
 import { p, setEnv } from "./utils";
+import { Renderer } from "./renderer";
 
 document.addEventListener("contextmenu", (event) => event.preventDefault());
 
@@ -19,6 +20,8 @@ async function main() {
       p.imageMode(p.CENTER);
       p.frameRate(120);
       translation = p.createVector(0, 0);
+
+      Renderer.mouse = p.createVector();
     };
 
     p.windowResized = function windowResized() {
@@ -35,8 +38,12 @@ async function main() {
       p.scale(multiplier);
       p.translate(translation.x, translation.y);
 
-      // Draw stuff Here
-      p.circle(0, 0, 25);
+      const translated = p.createVector(p.mouseX, p.mouseY);
+      translated.mult(1 / multiplier);
+      translated.sub(translation);
+      Renderer.mouse.set(translated);
+
+      Renderer.draw();
 
       p.translate(-translation.x, -translation.y);
       p.scale(1 / multiplier);
