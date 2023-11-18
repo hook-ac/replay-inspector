@@ -1,7 +1,12 @@
 import p5 from "p5";
 import "./style.css";
+import "./globals.css";
 import { p, setEnv } from "./utils";
 import { Renderer } from "./renderer";
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { ThemeProvider } from "./interface/components/theme-provider";
+import { App } from "./interface/App";
 
 document.addEventListener("contextmenu", (event) => event.preventDefault());
 
@@ -92,3 +97,11 @@ async function main() {
 }
 
 main();
+
+ReactDOM.createRoot(document.getElementById("root")!).render(
+  <React.StrictMode>
+    <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+      <App />
+    </ThemeProvider>
+  </React.StrictMode>
+);

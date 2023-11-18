@@ -6,4 +6,4 @@ You can use this to render custom stuff and give users ability to freely move ar
 
 That's about it.
 
-Stack: P5, Vite, TypeScript.
+Stack: P5, Vite, TypeScript, React, shadcn/ui

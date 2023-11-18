@@ -12,10 +12,12 @@
     "noEmit": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noImplicitReturns": true
+    "noImplicitReturns": true,
+    "jsx": "react-jsx",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    }
   },
-  "include": [
-    "./src",
-    "node_modules/@types/p5/index.d.ts"
-  ]
+  "include": ["./src", "node_modules/@types/p5/index.d.ts"]
 }
