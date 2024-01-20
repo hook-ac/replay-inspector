@@ -4,7 +4,7 @@ import p5 from "p5";
 
 export class Drawer {
   private static imageCache: Record<string, p5.Graphics> = {};
-  private static images = {
+  static images = {
     cursor: undefined as any as p5.Image,
     cursortrail: undefined as any as p5.Image,
     hitcircle: undefined as any as p5.Image,
@@ -35,7 +35,7 @@ export class Drawer {
 
   static setDrawingOpacity(opacity: number) {
     //@ts-ignore
-    p.drawingContext.globalAlpha = opacity;
+    this.p.drawingContext.globalAlpha = opacity;
   }
 
   static drawCircleJudgement(
@@ -192,7 +192,7 @@ export class Drawer {
   ) {
     Drawer.p.push();
     //@ts-ignore
-    const ctx = p.drawingContext;
+    const ctx = Drawer.p.drawingContext;
     ctx.lineCap = "round";
     ctx.lineJoin = "round";
     Drawer.p.noFill();

@@ -26,6 +26,7 @@ async function main() {
       p.frameRate(120);
       translation = p.createVector(0, 0);
 
+      Renderer.setup();
       Renderer.mouse = p.createVector();
     };
 

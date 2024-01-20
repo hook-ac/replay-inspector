@@ -13,7 +13,7 @@ import {
 import { Drawer } from "./Drawer";
 import { Vec2 } from "@osujs/math";
 
-export class Renderer {
+export class OsuRenderer {
   private static preempt: number;
   private static fadeIn: number;
 
