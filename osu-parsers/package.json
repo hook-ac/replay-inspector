@@ -1,0 +1,65 @@
+{
+  "name": "osu-parsers",
+  "version": "4.1.3",
+  "description": "A bundle of parsers for osu! file formats based on the osu!lazer source code.",
+  "exports": {
+    "node": {
+      "import": "./lib/node.mjs",
+      "require": "./lib/node.cjs"
+    },
+    "import": "./lib/browser.mjs"
+  },
+  "types": "./lib/index.d.ts",
+  "scripts": {
+    "build": "rollup -c && npm run format",
+    "test": "jest --verbose",
+    "fix": "eslint --fix ./src",
+    "format": "eslint --fix ./lib/** --no-ignore",
+    "prepublishOnly": "npm run build",
+    "docs": "npx typedoc"
+  },
+  "keywords": [
+    "osu",
+    "beatmap",
+    "storyboard",
+    "score",
+    "replay",
+    "parser",
+    "osu!std",
+    "osu!taiko",
+    "osu!mania",
+    "osu!catch",
+    ".osu",
+    ".osb",
+    ".osr"
+  ],
+  "author": "Kionell",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kionell/osu-parsers"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^21.0.1",
+    "@rollup/plugin-typescript": "^8.2.1",
+    "@types/jest": "^26.0.22",
+    "@types/node": "^14.18.12",
+    "@typescript-eslint/eslint-plugin": "^4.20.0",
+    "@typescript-eslint/parser": "^4.21.0",
+    "eslint": "^7.23.0",
+    "eslint-plugin-import": "^2.22.1",
+    "jest": "^26.6.3",
+    "rollup": "^2.44.0",
+    "rollup-plugin-dts": "^3.0.1",
+    "rollup-plugin-node-externals": "^3.1.2",
+    "typedoc": "^0.22.10",
+    "typedoc-plugin-missing-exports": "^1.0.0",
+    "typescript": "^4.1.5"
+  },
+  "dependencies": {
+    "lzma-js-simple-v2": "^1.2.2"
+  },
+  "peerDependencies": {
+    "osu-classes": "^3.0.0"
+  }
+}

@@ -1,7 +1,7 @@
-import { createStore } from "zustand/vanilla";
 import p5 from "p5";
+import { create } from "zustand";
 
-export const state = createStore<{}>(() => ({}));
+export const state = create<{}>(() => ({}));
 
 export let p: p5;
 
