@@ -2,13 +2,13 @@ import p5 from "p5";
 import "./style.css";
 import "./globals.css";
 import { p, setEnv } from "./utils";
-import { Renderer } from "./renderer";
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { ThemeProvider } from "./interface/components/theme-provider";
 import { App } from "./interface/App";
 import { Events, hookable } from "./hooks";
 import "@/hooks/starter";
+import { Toaster } from "./interface/components/ui/sonner";
 
 document.addEventListener("contextmenu", (event) => event.preventDefault());
 const handleWheel = hookable(Events.mouseWheel);
@@ -24,6 +24,7 @@ async function main() {
     p.draw = hookable(Events.draw);
     p.mousePressed = hookable(Events.mousePressed);
     p.mouseDragged = hookable(Events.mouseDragged);
+    p.mouseReleased = hookable(Events.mouseReleased);
   }, document.getElementById("app")!);
 }
 
@@ -33,6 +34,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
       <App />
+      <Toaster />
     </ThemeProvider>
   </React.StrictMode>
 );

@@ -2,6 +2,7 @@ import { Vector } from "p5";
 import { p } from "./utils";
 import { OsuRenderer } from "./osu/OsuRenderer";
 import { Drawer } from "./osu/Drawer";
+import { toast } from "sonner";
 
 export class Renderer {
   static mouse: Vector;
@@ -12,6 +13,9 @@ export class Renderer {
 
     await Drawer.loadDefaultImages();
     await OsuRenderer.loadReplayFromUrl("./replay.osr");
+    toast(`Successfully loaded`, {
+      description: `Played by ${OsuRenderer.replay.info.username}.`,
+    });
   }
 
   static draw() {
