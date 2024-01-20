@@ -17,7 +17,8 @@ export class Renderer {
   static draw() {
     if (!OsuRenderer.beatmap) return;
 
-    OsuRenderer.renderAtTime(0);
+    OsuRenderer.setTime(OsuRenderer.time + 1);
+    OsuRenderer.render();
     p.circle(this.mouse.x, this.mouse.y, 25);
   }
 }

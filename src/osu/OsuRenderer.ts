@@ -18,7 +18,7 @@ export class OsuRenderer {
   private static preempt: number;
   private static fadeIn: number;
 
-  static time: number;
+  static time: number = 0;
   static beatmap: StandardBeatmap;
   static og_beatmap: StandardBeatmap;
   static replay: Score;
@@ -34,13 +34,12 @@ export class OsuRenderer {
     this.beatmap = undefined as any;
   }
 
-  static renderAtTime(time: number) {
+  static render() {
     if (!this.beatmap || !this.replay) return;
 
-    if (time >= this.replay.replay!.length - 500)
-      time = this.replay.replay!.length - 500;
+    if (this.time >= this.replay.replay!.length - 500)
+      this.time = this.replay.replay!.length - 500;
 
-    this.setTime(time);
     for (let i = this.beatmap.hitObjects.length - 1; i >= 0; i--) {
       this.renderObject(this.beatmap.hitObjects[i]);
     }
@@ -128,7 +127,7 @@ export class OsuRenderer {
     });
   }
 
-  private static setTime(time: number) {
+  static setTime(time: number) {
     this.time = time;
   }
 
