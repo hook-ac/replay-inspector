@@ -11,10 +11,10 @@ import {
   AllHitObjects,
 } from "@osujs/core";
 
-import { createStore } from "zustand/vanilla";
 import { ReplayButtonState, Score } from "osu-classes";
 import { GameState } from "@osujs/core/gameplay/GameState";
 import p5, { Image } from "p5";
+import { create } from "zustand";
 
 const ruleset = new StandardRuleset();
 const scoreDecoder = new ScoreDecoder();
@@ -162,12 +162,28 @@ export async function loadImageAsync(image: string): Promise<Image> {
   });
 }
 
-export const state = createStore<{
+export const state = create<{
   beatmap: StandardBeatmap | null;
   replay: Score | null;
+  metadataEditorDialog: boolean;
+  openDialog: boolean;
+  saveDialog: boolean;
+  dataAnalysisDialog: boolean;
+  achivementsDialog: boolean;
+  aboutDialog: boolean;
+  grda: any;
+  tool: "cursor" | "brush" | "advanced" | "smoother";
 }>(() => ({
+  metadataEditorDialog: false,
+  openDialog: false,
+  saveDialog: false,
+  aboutDialog: false,
+  achivementsDialog: false,
+  dataAnalysisDialog: false,
   beatmap: null,
   replay: null,
+  grda: null,
+  tool: "cursor",
 }));
 
 export let p: p5;
