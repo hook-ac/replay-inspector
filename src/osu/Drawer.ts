@@ -1,6 +1,7 @@
 import { Vector2 } from "osu-classes";
 import { Md5 } from "ts-md5";
 import p5 from "p5";
+import { loadImageAsync } from "@/utils";
 
 export class Drawer {
   private static imageCache: Record<string, p5.Graphics> = {};
@@ -27,6 +28,13 @@ export class Drawer {
 
   static setP(_p: p5) {
     this.p = _p;
+  }
+
+  static async loadDefaultImages() {
+    for (const imageName of Object.keys(Drawer.images)) {
+      Drawer.images[imageName as keyof typeof Drawer.images] =
+        await loadImageAsync(`/${imageName}.png`);
+    }
   }
 
   static setImages(images: typeof this.images) {

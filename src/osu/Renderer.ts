@@ -12,6 +12,7 @@ import {
 } from "osu-standard-stable";
 import { Drawer } from "./Drawer";
 import { Vec2 } from "@osujs/math";
+import { getBeatmap, getId, getMap, getReplay } from "@/utils";
 
 export class OsuRenderer {
   private static preempt: number;
@@ -99,6 +100,19 @@ export class OsuRenderer {
     }
     this.preempt = preempt;
     this.fadeIn = fadeIn;
+  }
+
+  static async loadReplayFromUrl(url: string) {
+    OsuRenderer.purge();
+
+    const replayBuffer = await (await fetch(url)).arrayBuffer();
+    const replay = await getReplay(replayBuffer);
+    let hash = replay.info.beatmapHashMD5;
+    const id = await getId(hash!);
+    const map = await getMap(id);
+    const beatmap = await getBeatmap(map, replay);
+
+    OsuRenderer.setOptions(beatmap, replay);
   }
 
   static setOptions(beatmap: StandardBeatmap, replay: Score) {
