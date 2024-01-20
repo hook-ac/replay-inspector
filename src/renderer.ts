@@ -1,6 +1,6 @@
 import { Vector } from "p5";
 import { p } from "./utils";
-import { OsuRenderer } from "./osu/Renderer";
+import { OsuRenderer } from "./osu/OsuRenderer";
 import { Drawer } from "./osu/Drawer";
 
 export class Renderer {
