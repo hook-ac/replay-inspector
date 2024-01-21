@@ -1,5 +1,5 @@
 import { Vector } from "p5";
-import { p } from "./utils";
+import { p, state } from "./utils";
 import { OsuRenderer } from "./osu/OsuRenderer";
 import { Drawer } from "./osu/Drawer";
 import { toast } from "sonner";
@@ -15,6 +15,11 @@ export class Renderer {
     await OsuRenderer.loadReplayFromUrl("./replay.osr");
     toast(`Successfully loaded`, {
       description: `Played by ${OsuRenderer.replay.info.username}.`,
+    });
+
+    state.setState({
+      beatmap: OsuRenderer.beatmap,
+      replay: OsuRenderer.replay,
     });
   }
 

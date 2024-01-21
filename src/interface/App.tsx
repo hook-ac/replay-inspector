@@ -14,7 +14,6 @@ export function App() {
       <OpenDialog />
       <SaveDialog />
       <AboutDialog />
-      <Toaster />
       <AnalysisSheet />
     </>
   );
