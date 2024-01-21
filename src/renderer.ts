@@ -13,7 +13,12 @@ export class Renderer {
     Drawer.setP(p);
 
     await Drawer.loadDefaultImages();
-    await OsuRenderer.loadReplayFromUrl("./replay.osr");
+
+    // Development
+
+    if (document.location.host.includes("localhost")) {
+      await OsuRenderer.loadReplayFromUrl("./replay.osr");
+    }
   }
 
   static draw() {

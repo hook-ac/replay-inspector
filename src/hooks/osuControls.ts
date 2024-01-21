@@ -7,6 +7,7 @@ const keyPressed = () => {
 };
 
 const mouseWheel = (event: WheelEvent) => {
+  if (event.ctrlKey) return;
   if (event.deltaY > 0) {
     OsuRenderer.setTime(OsuRenderer.time + 35);
   } else {
