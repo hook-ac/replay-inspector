@@ -72,9 +72,9 @@ export class OsuRenderer {
 
   static getCurrentDifficulty() {
     return {
-      AR: OsuRenderer.og_beatmap.difficulty.approachRate,
-      CS: OsuRenderer.og_beatmap.difficulty.circleSize,
-      OD: OsuRenderer.og_beatmap.difficulty.overallDifficulty,
+      AR: OsuRenderer.og_beatmap?.difficulty?.approachRate,
+      CS: OsuRenderer.og_beatmap?.difficulty?.circleSize,
+      OD: OsuRenderer.og_beatmap?.difficulty?.overallDifficulty,
     };
   }
 

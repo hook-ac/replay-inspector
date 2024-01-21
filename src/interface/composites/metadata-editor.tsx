@@ -10,22 +10,22 @@ import {
 import { Input } from "@/interface/components/ui/input";
 import { Label } from "@/interface/components/ui/label";
 import { Badge } from "@/interface/components/ui/badge";
-import { RefObject, useState } from "react";
+import { RefObject, useEffect, useState } from "react";
 import { state } from "@/utils";
 import { toast } from "sonner";
 import { OsuRenderer } from "@/osu/OsuRenderer";
 
 export function MetadataEditor() {
   const { metadataEditorDialog, beatmap } = state();
-  const [newOd, setNewOd] = useState(
-    Math.round(OsuRenderer.getCurrentDifficulty().OD * 100) / 100
-  );
-  const [newAr, setNewAr] = useState(
-    Math.round(OsuRenderer.getCurrentDifficulty().AR * 100) / 100
-  );
-  const [newCs, setNewCs] = useState(
-    Math.round(OsuRenderer.getCurrentDifficulty().CS * 100) / 100
-  );
+  const [newOd, setNewOd] = useState(0);
+  const [newAr, setNewAr] = useState(0);
+  const [newCs, setNewCs] = useState(0);
+
+  useEffect(() => {
+    setNewOd(Math.round(OsuRenderer.getCurrentDifficulty().OD * 100) / 100);
+    setNewAr(Math.round(OsuRenderer.getCurrentDifficulty().AR * 100) / 100);
+    setNewCs(Math.round(OsuRenderer.getCurrentDifficulty().CS * 100) / 100);
+  }, [metadataEditorDialog]);
 
   if (!beatmap) {
     if (metadataEditorDialog) {
