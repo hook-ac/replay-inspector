@@ -13,12 +13,12 @@ export class Renderer {
     Drawer.setP(p);
 
     await Drawer.loadDefaultImages();
+    await OsuRenderer.loadReplayFromUrl("./replay.osr");
   }
 
   static draw() {
     if (!OsuRenderer.beatmap) return;
 
-    OsuRenderer.setTime(OsuRenderer.time + 1);
     OsuRenderer.render();
     p.circle(this.mouse.x, this.mouse.y, 25);
   }
@@ -37,6 +37,16 @@ export class Renderer {
     OsuRenderer.event.on(OsuRendererEvents.LOAD, () => {
       toast(`Successfully loaded`, {
         description: `Played by ${OsuRenderer.replay.info.username}.`,
+      });
+    });
+    OsuRenderer.event.on(OsuRendererEvents.PLAY, () => {
+      state.setState({
+        playing: OsuRenderer.playing,
+      });
+    });
+    OsuRenderer.event.on(OsuRendererEvents.TIME, () => {
+      state.setState({
+        time: OsuRenderer.time,
       });
     });
   }

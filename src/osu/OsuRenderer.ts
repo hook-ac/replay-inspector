@@ -18,6 +18,8 @@ import EventEmitter from "eventemitter3";
 export enum OsuRendererEvents {
   UPDATE = "UPDATE",
   LOAD = "LOAD",
+  PLAY = "PLAY",
+  TIME = "TIME",
 }
 
 export class OsuRendererBridge extends EventEmitter {
@@ -29,6 +31,9 @@ export class OsuRendererBridge extends EventEmitter {
 export class OsuRenderer {
   private static preempt: number;
   private static fadeIn: number;
+  private static lastRender: number = Date.now();
+
+  static playing: boolean = false;
 
   static event = new OsuRendererBridge();
 
@@ -57,6 +62,12 @@ export class OsuRenderer {
     for (let i = this.beatmap.hitObjects.length - 1; i >= 0; i--) {
       this.renderObject(this.beatmap.hitObjects[i]);
     }
+
+    if (this.playing) {
+      this.setTime(this.time + (Date.now() - this.lastRender));
+    }
+
+    this.lastRender = Date.now();
 
     this.renderPath();
     Drawer.drawField();
@@ -124,6 +135,11 @@ export class OsuRenderer {
     this.event.emit(OsuRendererEvents.UPDATE);
   }
 
+  static setPlaying(state: boolean) {
+    this.playing = state;
+    this.event.emit(OsuRendererEvents.PLAY);
+  }
+
   static refreshMetadata() {
     OsuRenderer.setMetadata({
       AR: OsuRenderer.og_beatmap.difficulty.approachRate,
@@ -174,6 +190,7 @@ export class OsuRenderer {
 
   static setTime(time: number) {
     this.time = time;
+    this.event.emit(OsuRendererEvents.TIME);
   }
 
   private static renderObject(hitObject: StandardHitObject) {

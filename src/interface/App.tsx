@@ -5,6 +5,7 @@ import { OpenDialog } from "./composites/open-dialog";
 import { SaveDialog } from "./composites/save-dialog";
 import { AnalysisSheet } from "./composites/analysis.-sheet";
 import { Navbar } from "./composites/Menu";
+import { SongSlider } from "./composites/song-slider";
 
 export function App() {
   return (
@@ -15,6 +16,7 @@ export function App() {
       <SaveDialog />
       <AboutDialog />
       <AnalysisSheet />
+      <SongSlider />
     </>
   );
 }

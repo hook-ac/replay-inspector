@@ -12,8 +12,8 @@ export enum Events {
   mouseDragged,
   mouseReleased,
   mouseWheel,
-  KeyPressed,
-  KeyReleased,
+  keyPressed,
+  keyReleased,
 }
 
 const hooks: Map<any, Hook<Events>[]> = new Map();

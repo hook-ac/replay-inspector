@@ -174,6 +174,8 @@ export const state = create<{
   grda: any;
   tool: "cursor" | "brush" | "advanced" | "smoother";
   mods: IMod[] | null;
+  playing: boolean;
+  time: number;
 }>(() => ({
   metadataEditorDialog: false,
   openDialog: false,
@@ -186,6 +188,8 @@ export const state = create<{
   grda: null,
   tool: "cursor",
   mods: null,
+  playing: false,
+  time: 0,
 }));
 
 export let p: p5;

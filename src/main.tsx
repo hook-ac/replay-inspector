@@ -25,6 +25,8 @@ async function main() {
     p.mousePressed = hookable(Events.mousePressed);
     p.mouseDragged = hookable(Events.mouseDragged);
     p.mouseReleased = hookable(Events.mouseReleased);
+    p.keyPressed = hookable(Events.keyPressed);
+    p.keyReleased = hookable(Events.keyReleased);
   }, document.getElementById("app")!);
 }
 
