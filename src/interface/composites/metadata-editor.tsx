@@ -9,8 +9,7 @@ import {
 } from "@/interface/components/ui/dialog";
 import { Input } from "@/interface/components/ui/input";
 import { Label } from "@/interface/components/ui/label";
-import { Badge } from "@/interface/components/ui/badge";
-import { RefObject, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { state } from "@/utils";
 import { toast } from "sonner";
 import { OsuRenderer } from "@/osu/OsuRenderer";
@@ -25,7 +24,7 @@ export function MetadataEditor() {
     setNewOd(Math.round(OsuRenderer.getCurrentDifficulty().OD * 100) / 100);
     setNewAr(Math.round(OsuRenderer.getCurrentDifficulty().AR * 100) / 100);
     setNewCs(Math.round(OsuRenderer.getCurrentDifficulty().CS * 100) / 100);
-  }, [metadataEditorDialog]);
+  }, [metadataEditorDialog, beatmap]);
 
   if (!beatmap) {
     if (metadataEditorDialog) {

@@ -7,7 +7,6 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/interface/components/ui/dialog";
-import { Badge } from "@/interface/components/ui/badge";
 import { state } from "@/utils";
 export function SaveDialog() {
   const { saveDialog } = state();
