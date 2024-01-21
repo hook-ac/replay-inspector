@@ -13,10 +13,24 @@ import {
 import { Drawer } from "./Drawer";
 import { Vec2 } from "@osujs/math";
 import { getBeatmap, getId, getMap, getReplay } from "@/utils";
+import EventEmitter from "eventemitter3";
+
+export enum OsuRendererEvents {
+  UPDATE = "UPDATE",
+  LOAD = "LOAD",
+}
+
+export class OsuRendererBridge extends EventEmitter {
+  constructor() {
+    super();
+  }
+}
 
 export class OsuRenderer {
   private static preempt: number;
   private static fadeIn: number;
+
+  static event = new OsuRendererBridge();
 
   static time: number = 0;
   static beatmap: StandardBeatmap;
@@ -112,6 +126,7 @@ export class OsuRenderer {
     const beatmap = await getBeatmap(map, replay);
 
     OsuRenderer.setOptions(beatmap, replay);
+    this.event.emit(OsuRendererEvents.LOAD);
   }
 
   static setOptions(beatmap: StandardBeatmap, replay: Score) {
@@ -125,6 +140,8 @@ export class OsuRenderer {
       CS: this.beatmap.difficulty.circleSize,
       OD: this.beatmap.difficulty.overallDifficulty,
     });
+
+    this.event.emit(OsuRendererEvents.UPDATE);
   }
 
   static setTime(time: number) {
