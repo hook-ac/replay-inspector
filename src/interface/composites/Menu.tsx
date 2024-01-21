@@ -11,7 +11,7 @@ import {
 import { OsuRenderer } from "@/osu/OsuRenderer";
 import { state } from "@/utils";
 export function Navbar() {
-  const { tool } = state();
+  const { beatmap, mods } = state();
   return (
     <Menubar className="rounded-none border-x-0 border-t-0 flex justify-between px-4">
       <div className="flex gap-2">
@@ -179,7 +179,7 @@ export function Navbar() {
         )}
       </div>
 
-      {/* {beatmap && (
+      {beatmap && (
         <div className="flex gap-4 items-center">
           {mods?.map((mod) => {
             return (
@@ -203,7 +203,7 @@ export function Navbar() {
             className="rounded-sm"
           />
         </div>
-      )} */}
+      )}
     </Menubar>
   );
 }

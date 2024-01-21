@@ -12,7 +12,7 @@ import {
 } from "osu-standard-stable";
 import { Drawer } from "./Drawer";
 import { Vec2 } from "@osujs/math";
-import { getBeatmap, getId, getMap, getReplay, state } from "@/utils";
+import { getBeatmap, getId, getMap, getReplay } from "@/utils";
 
 export class OsuRenderer {
   private static preempt: number;

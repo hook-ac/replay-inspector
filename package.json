@@ -8,6 +8,7 @@
     "tsc": "tsc"
   },
   "devDependencies": {
+    "@types/events": "^3.0.3",
     "@types/p5": "^0.9.1",
     "autoprefixer": "^10.4.16",
     "postcss": "^8.4.31",

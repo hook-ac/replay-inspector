@@ -17,9 +17,12 @@ export class Renderer {
       description: `Played by ${OsuRenderer.replay.info.username}.`,
     });
 
+    const options = OsuRenderer.getOptions();
+
     state.setState({
-      beatmap: OsuRenderer.beatmap,
-      replay: OsuRenderer.replay,
+      beatmap: options.beatmap,
+      replay: options.replay,
+      mods: options.mods,
     });
   }
 

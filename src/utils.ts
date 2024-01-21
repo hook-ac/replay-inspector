@@ -11,7 +11,7 @@ import {
   AllHitObjects,
 } from "@osujs/core";
 
-import { ReplayButtonState, Score } from "osu-classes";
+import { IMod, ReplayButtonState, Score } from "osu-classes";
 import { GameState } from "@osujs/core/gameplay/GameState";
 import p5, { Image } from "p5";
 import { create } from "zustand";
@@ -173,6 +173,7 @@ export const state = create<{
   aboutDialog: boolean;
   grda: any;
   tool: "cursor" | "brush" | "advanced" | "smoother";
+  mods: IMod[] | null;
 }>(() => ({
   metadataEditorDialog: false,
   openDialog: false,
@@ -184,6 +185,7 @@ export const state = create<{
   replay: null,
   grda: null,
   tool: "cursor",
+  mods: null,
 }));
 
 export let p: p5;
