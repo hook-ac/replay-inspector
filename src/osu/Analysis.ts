@@ -225,11 +225,7 @@ export function gRDA(score: Score, map: StandardBeatmap) {
   const { frameTimes, moddedFrameTimes, normalizationRate, presses, presses2 } =
     getPresses(score);
 
-  const { formattedPresses, joined } = getFormattedPresses(
-    presses,
-    presses2,
-    map
-  );
+  const { formattedPresses } = getFormattedPresses(presses, presses2, map);
 
   const {
     circlePresses,

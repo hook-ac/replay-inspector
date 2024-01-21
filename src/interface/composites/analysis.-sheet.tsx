@@ -6,16 +6,18 @@ import {
   SheetTitle,
 } from "@/interface/components/ui/sheet";
 import { Button } from "@/interface/components/ui/button";
-import { RefObject } from "react";
 import { BarChart, XAxis, Bar, ResponsiveContainer } from "recharts";
 import { state } from "@/utils";
+import { gRDA } from "@/osu/Analysis";
+import { OsuRenderer } from "@/osu/OsuRenderer";
 
 export function AnalysisSheet() {
   const { dataAnalysisDialog, grda } = state();
+
   return (
     <Sheet
       open={dataAnalysisDialog}
-      onOpenChange={(opened) => {
+      onOpenChange={(opened: boolean) => {
         state.setState({ dataAnalysisDialog: opened });
       }}
     >
@@ -35,10 +37,12 @@ export function AnalysisSheet() {
           variant="outline"
           className="mt-4"
           onClick={() => {
-            // requestGRDA(frame);
+            state.setState({
+              grda: gRDA(OsuRenderer.replay, OsuRenderer.beatmap),
+            });
           }}
         >
-          Request Analysis
+          Analyze Replay
         </Button>
         {grda && (
           <div>
