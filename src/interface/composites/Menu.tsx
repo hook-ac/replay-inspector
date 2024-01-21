@@ -149,14 +149,16 @@ export function Navbar() {
               <MenubarContent>
                 <MenubarItem
                   onClick={() => {
-                    // state.setState({ forceHR: true });
+                    OsuRenderer.forceHR = true;
+                    OsuRenderer.refreshMetadata();
                   }}
                 >
                   Apply Hardrock
                 </MenubarItem>
                 <MenubarItem
                   onClick={() => {
-                    // state.setState({ forceHR: false });
+                    OsuRenderer.forceHR = false;
+                    OsuRenderer.refreshMetadata();
                   }}
                 >
                   Remove Hardrock

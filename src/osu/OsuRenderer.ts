@@ -113,6 +113,15 @@ export class OsuRenderer {
     }
     this.preempt = preempt;
     this.fadeIn = fadeIn;
+    this.event.emit(OsuRendererEvents.UPDATE);
+  }
+
+  static refreshMetadata() {
+    OsuRenderer.setMetadata({
+      AR: OsuRenderer.og_beatmap.difficulty.approachRate,
+      CS: OsuRenderer.og_beatmap.difficulty.circleSize,
+      OD: OsuRenderer.og_beatmap.difficulty.overallDifficulty,
+    });
   }
 
   static async loadReplayFromUrl(url: string) {
@@ -140,8 +149,6 @@ export class OsuRenderer {
       CS: this.beatmap.difficulty.circleSize,
       OD: this.beatmap.difficulty.overallDifficulty,
     });
-
-    this.event.emit(OsuRendererEvents.UPDATE);
   }
 
   static setTime(time: number) {
