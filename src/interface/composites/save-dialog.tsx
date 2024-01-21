@@ -20,15 +20,10 @@ export function SaveDialog() {
     >
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle>
-            Export Replay <Badge variant={"outline"}>Development</Badge>
-          </DialogTitle>
+          <DialogTitle>Export Replay</DialogTitle>
           <DialogDescription>Export your replay</DialogDescription>
         </DialogHeader>
         <DialogFooter>
-          <Button type="submit" disabled>
-            Export as .dimu
-          </Button>
           <Button type="submit" disabled>
             Export as .osr
           </Button>

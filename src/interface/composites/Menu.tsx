@@ -60,7 +60,7 @@ export function Navbar() {
             <MenubarMenu>
               <MenubarTrigger>Tools</MenubarTrigger>
               <MenubarContent>
-                <MenubarItem
+                {/* <MenubarItem
                   onClick={() => {
                     state.setState({ tool: "cursor" });
                   }}
@@ -73,7 +73,7 @@ export function Navbar() {
                   }}
                 >
                   Brush <MenubarShortcut>B</MenubarShortcut>
-                </MenubarItem>
+                </MenubarItem> */}
                 {/* <MenubarItem
                   onClick={() => {
                     state.setState({ tool: "smoother" });
@@ -82,13 +82,13 @@ export function Navbar() {
                   Smoother <MenubarShortcut>V</MenubarShortcut>
                 </MenubarItem>
                 */}
-                <MenubarItem
+                {/* <MenubarItem
                   onClick={() => {
                     state.setState({ tool: "advanced" });
                   }}
                 >
                   Advanced <MenubarShortcut>M</MenubarShortcut>
-                </MenubarItem>
+                </MenubarItem> */}
                 <MenubarItem
                   onClick={() => {
                     state.setState({ metadataEditorDialog: true });
@@ -98,7 +98,7 @@ export function Navbar() {
                 </MenubarItem>
               </MenubarContent>
             </MenubarMenu>
-            <MenubarMenu>
+            {/* <MenubarMenu>
               <MenubarTrigger>Shortcuts</MenubarTrigger>
               <MenubarContent>
                 <MenubarItem>
@@ -143,7 +143,7 @@ export function Navbar() {
                   Decrease Path Range<MenubarShortcut>Q</MenubarShortcut>
                 </MenubarItem>
               </MenubarContent>
-            </MenubarMenu>
+            </MenubarMenu> */}
             <MenubarMenu>
               <MenubarTrigger>Mods</MenubarTrigger>
               <MenubarContent>

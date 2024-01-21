@@ -13,18 +13,19 @@ import { Badge } from "@/interface/components/ui/badge";
 import { RefObject, useState } from "react";
 import { state } from "@/utils";
 import { toast } from "sonner";
+import { OsuRenderer } from "@/osu/OsuRenderer";
 
 export function MetadataEditor() {
   const { metadataEditorDialog, beatmap } = state();
-  const [newOd, setNewOd] = useState(0);
-  const [newAr, setNewAr] = useState(0);
-  const [newCs, setNewCs] = useState(0);
-
-  // useEffect(() => {
-  //   setNewOd(Math.round(state.getState().difficulty.OD * 10) / 10);
-  //   setNewAr(Math.round(state.getState().difficulty.AR * 10) / 10);
-  //   setNewCs(Math.round(state.getState().difficulty.CS * 10) / 10);
-  // }, [metadataEditorDialog, difficulty]);
+  const [newOd, setNewOd] = useState(
+    Math.round(OsuRenderer.getCurrentDifficulty().OD * 100) / 100
+  );
+  const [newAr, setNewAr] = useState(
+    Math.round(OsuRenderer.getCurrentDifficulty().AR * 100) / 100
+  );
+  const [newCs, setNewCs] = useState(
+    Math.round(OsuRenderer.getCurrentDifficulty().CS * 100) / 100
+  );
 
   if (!beatmap) {
     if (metadataEditorDialog) {
@@ -48,17 +49,12 @@ export function MetadataEditor() {
         <form
           onSubmit={(event) => {
             event?.preventDefault();
-            // state.setState((state) => ({
-            //   difficulty: { CS: newCs, AR: newAr, OD: newOd },
-            // }));
-            // toast(
-            //   {
-            //     title: "Metadata updated",
-            //     description: "Metadata has been updated",
-            //   },
-            //   1500
-            // );
-            // changeMetadata(newCs, newAr, newOd, frame);
+            OsuRenderer.setMetadata({
+              AR: newAr,
+              OD: newOd,
+              CS: newCs,
+            });
+            toast("Metadata changed!");
           }}
         >
           <DialogHeader>

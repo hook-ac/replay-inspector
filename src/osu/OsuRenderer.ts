@@ -70,6 +70,14 @@ export class OsuRenderer {
     };
   }
 
+  static getCurrentDifficulty() {
+    return {
+      AR: OsuRenderer.og_beatmap.difficulty.approachRate,
+      CS: OsuRenderer.og_beatmap.difficulty.circleSize,
+      OD: OsuRenderer.og_beatmap.difficulty.overallDifficulty,
+    };
+  }
+
   static setMetadata({ AR, CS, OD }: { AR: number; CS: number; OD: number }) {
     this.og_beatmap.difficulty.approachRate = AR;
     this.og_beatmap.difficulty.circleSize = CS;
