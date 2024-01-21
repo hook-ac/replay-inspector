@@ -14,9 +14,6 @@ export class Renderer {
 
     await Drawer.loadDefaultImages();
     await OsuRenderer.loadReplayFromUrl("./replay.osr");
-    toast(`Successfully loaded`, {
-      description: `Played by ${OsuRenderer.replay.info.username}.`,
-    });
   }
 
   static draw() {
@@ -35,6 +32,12 @@ export class Renderer {
         beatmap: options.beatmap,
         replay: options.replay,
         mods: options.mods,
+      });
+    });
+
+    OsuRenderer.event.on(OsuRendererEvents.LOAD, () => {
+      toast(`Successfully loaded`, {
+        description: `Played by ${OsuRenderer.replay.info.username}.`,
       });
     });
   }

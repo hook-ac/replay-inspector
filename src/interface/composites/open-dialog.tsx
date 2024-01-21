@@ -9,6 +9,7 @@ import {
 import { UploadIcon } from "lucide-react";
 import Dropzone from "react-dropzone";
 import { state } from "@/utils";
+import { OsuRenderer } from "@/osu/OsuRenderer";
 export function OpenDialog() {
   const { openDialog } = state();
   return (
@@ -27,7 +28,7 @@ export function OpenDialog() {
         <Button
           variant="outline"
           onClick={() => {
-            // sendReplay(frame);
+            OsuRenderer.loadReplayFromUrl("./replay.osr");
             state.setState({ openDialog: false });
           }}
         >
@@ -41,7 +42,7 @@ export function OpenDialog() {
             reader.readAsArrayBuffer(file);
             reader.onload = function (event: any) {
               const buffer = event.target.result;
-              // sendReplay(frame, buffer);
+              OsuRenderer.loadReplayFromBuffer(buffer);
               state.setState({ openDialog: false });
             };
           }}

@@ -138,6 +138,19 @@ export class OsuRenderer {
     this.event.emit(OsuRendererEvents.LOAD);
   }
 
+  static async loadReplayFromBuffer(replayBuffer: ArrayBuffer) {
+    OsuRenderer.purge();
+
+    const replay = await getReplay(replayBuffer);
+    let hash = replay.info.beatmapHashMD5;
+    const id = await getId(hash!);
+    const map = await getMap(id);
+    const beatmap = await getBeatmap(map, replay);
+
+    OsuRenderer.setOptions(beatmap, replay);
+    this.event.emit(OsuRendererEvents.LOAD);
+  }
+
   static setOptions(beatmap: StandardBeatmap, replay: Score) {
     this.forceHR = undefined;
     this.replay = replay;
