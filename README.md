@@ -1,9 +1,46 @@
-# Sample P5 Editor
+![](./public/gitlogo.png)
 
-This is a very simple base for complex editors that require Dragging and Zooming in an infinite space.
+![](https://img.shields.io/badge/status-in_development-blue)
 
-You can use this to render custom stuff and give users ability to freely move around using Middle mouse hold for drag and CTRL+scroll for zooming.
+Replay Inspector is a beatmap/replay analyzer and editor for [osu!](https://osu.ppy.sh/) and is currently in development phase.
 
-That's about it.
+> Inspector is NOT a fork of abstrakt8's rewind, and it has been developed from ground up using same utilites. This project was developed with simplicity in mind using beginner friendly frameworks and easy structure.
 
-Stack: P5, Vite, TypeScript, React, shadcn/ui
+## Geting started
+
+To use the public version of Replay Inspector, you can follow [click](https://edit.assist.games).
+
+If you wanna clone and use it locally, proceed by
+
+```
+git clone https://github.com/cunev/replay-inspector
+```
+
+then install packages
+
+```
+bun install
+```
+
+and run the editor
+
+
+```
+bun run dev
+```
+
+## Features
+- View replay path and beatmap
+- Seek through replay
+- View clicks
+- Enable/disable hardrock
+- Modify map metadata
+- Analyze clicks, frametimes and release times
+
+## In development
+- Export replays
+- Modify path
+- Modify keypresses
+- Music playback
+- Shortcuts
+
