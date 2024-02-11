@@ -19,7 +19,10 @@ export function SongSlider() {
 
         </div>
         <div className="flex gap-2 w-full justify-center">
-          <Button variant="outline" size="icon">
+          <Button variant="outline" size="icon"
+            onClick={() => {
+              OsuRenderer.setTime(OsuRenderer.time - 1000);
+            }}>
             <ArrowLeft />
           </Button>
           <Button
@@ -31,7 +34,10 @@ export function SongSlider() {
           >
             {playing ? <PauseIcon /> : <PlayIcon />}
           </Button>
-          <Button variant="outline" size="icon">
+          <Button variant="outline" size="icon"
+            onClick={() => {
+              OsuRenderer.setTime(OsuRenderer.time + 1000);
+            }}>
             <ArrowRight />
           </Button>
         </div>

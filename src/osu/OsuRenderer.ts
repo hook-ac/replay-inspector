@@ -12,7 +12,7 @@ import {
 } from "osu-standard-stable";
 import { Drawer } from "./Drawer";
 import { Vec2 } from "@osujs/math";
-import { getBeatmap, getId, getMap, getReplay } from "@/utils";
+import { clamp, getBeatmap, getId, getMap, getReplay } from "@/utils";
 import EventEmitter from "eventemitter3";
 
 export enum OsuRendererEvents {
@@ -189,7 +189,7 @@ export class OsuRenderer {
   }
 
   static setTime(time: number) {
-    this.time = time;
+    this.time = clamp(time, 0, OsuRenderer.replay.replay?.length || 0);
     this.event.emit(OsuRendererEvents.TIME);
   }
 
