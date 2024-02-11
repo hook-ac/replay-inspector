@@ -198,6 +198,12 @@ export const state = create<{
   time: 0,
 }));
 
+state.subscribe((newState) => {
+  if (newState.beatmap) {
+    document.title = `${newState.beatmap.metadata.artist} - ${newState.beatmap.metadata.titleUnicode} | Replay Inspector`
+  }
+})
+
 export let p: p5;
 
 export function setEnv(_p: p5) {

@@ -15,12 +15,22 @@ export function AboutDialog() {
         <img src="icon.png" alt="dpr" />
         <div className="bottom-0 left-0 ">
           <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight flex items-center gap-3">
-            osu! editor <Badge variant="outline">your mum</Badge>
+            Replay Inspector <Badge variant="outline">Editor</Badge>
           </h3>
           <div className="opacity-75">
-            <h3 className="text-sm">stop fucking bothering me</h3>
+            <h3 className="text-sm">Developed by Assist Games</h3>
           </div>
 
+
+          <Button
+            variant="outline"
+            className="mt-4 mr-2"
+            onClick={() => {
+              window.open("https://assist.games");
+            }}
+          >
+            Assist Games
+          </Button>
           <Button
             variant="outline"
             className="mt-4"
