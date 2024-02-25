@@ -4,7 +4,10 @@ import space from "/space.svg";
 import ekey from "/ekey.svg";
 import qkey from "/qkey.svg";
 import ctrl from "/ctrl.svg";
+import { state } from "@/utils";
 export function Helper() {
+  const { replay } = state();
+  if (!replay) return <></>;
   return (
     <div className="flex flex-col absolute right-10 top-16 gap-2 items-end">
       <div className="flex gap-2 text-xs items-center">
