@@ -6,45 +6,42 @@ import {
   canvasMultiplier,
   canvasTranslation,
 } from "./canvasControls";
+import { Hook } from "@/decorators/hook";
 
-const preload = () => {};
-
-const setup = () => {
-  p.createCanvas(p.windowWidth, p.windowHeight);
-  p.imageMode(p.CENTER);
-  p.frameRate(120);
-  Renderer.setup();
-  Renderer.mouse = p.createVector();
-};
-
-const draw = () => {
-  p.cursor("default");
-  if (canvasDragging) {
-    p.cursor("grabbing");
+export class p5Hooks {
+  @Hook(Events.setup)
+  static setup() {
+    p.createCanvas(p.windowWidth, p.windowHeight);
+    p.imageMode(p.CENTER);
+    p.frameRate(120);
+    Renderer.setup();
+    Renderer.mouse = p.createVector();
   }
 
-  p.background(0);
-  p.scale(canvasMultiplier);
-  p.translate(canvasTranslation.x, canvasTranslation.y);
+  @Hook(Events.draw)
+  static draw() {
+    p.cursor("default");
+    if (canvasDragging) {
+      p.cursor("grabbing");
+    }
 
-  const translated = p.createVector(p.mouseX, p.mouseY);
-  translated.mult(1 / canvasMultiplier);
-  translated.sub(canvasTranslation);
-  Renderer.mouse.set(translated);
+    p.background(0);
+    p.scale(canvasMultiplier);
+    p.translate(canvasTranslation.x, canvasTranslation.y);
 
-  Renderer.draw();
+    const translated = p.createVector(p.mouseX, p.mouseY);
+    translated.mult(1 / canvasMultiplier);
+    translated.sub(canvasTranslation);
+    Renderer.mouse.set(translated);
 
-  p.translate(-canvasTranslation.x, -canvasTranslation.y);
-  p.scale(1 / canvasMultiplier);
-};
+    Renderer.draw();
 
-const resize = () => {
-  p.resizeCanvas(p.windowWidth, p.windowHeight);
-};
+    p.translate(-canvasTranslation.x, -canvasTranslation.y);
+    p.scale(1 / canvasMultiplier);
+  }
 
-export function hookP5Base() {
-  hook({ event: Events.setup, callback: setup });
-  hook({ event: Events.preload, callback: preload });
-  hook({ event: Events.resize, callback: resize });
-  hook({ event: Events.draw, callback: draw });
+  @Hook(Events.resize)
+  static resize() {
+    p.resizeCanvas(p.windowWidth, p.windowHeight);
+  }
 }

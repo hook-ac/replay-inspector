@@ -39,7 +39,7 @@ export async function getReplay(buffer: ArrayBuffer) {
   return repl;
 }
 
-export const encodeFrames = (frames: any, beatmap: any) => {
+export const encodeFrames = (frames: any) => {
   const encoded: any[] = [];
 
   if (frames) {
