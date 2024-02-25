@@ -1,7 +1,6 @@
 import { Hook } from "@/decorators/hook";
 import { Events } from "@/hooks";
 import { OsuRenderer } from "@/osu/OsuRenderer";
-import { Tooling } from "@/tooling";
 import { p, state } from "@/utils";
 
 export class OsuControlHooks {
@@ -43,7 +42,5 @@ export class OsuControlHooks {
       currentState.saveDialog
     )
       return;
-
-    Tooling.mousePressed();
   }
 }

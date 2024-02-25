@@ -1,4 +1,4 @@
-import { Tool } from ".";
+import { Tool } from "./tool";
 import { Singleton } from "@/decorators/singleton";
 
 @Singleton

@@ -6,6 +6,7 @@ import { AnalysisSheet } from "./composites/analysis.-sheet";
 import { Navbar } from "./composites/Menu";
 import { SongSlider } from "./composites/song-slider";
 import { KeypressEditor } from "./composites/keypress-editor";
+import { Helper } from "./composites/helper";
 
 export function App() {
   return (
@@ -18,6 +19,7 @@ export function App() {
       <AnalysisSheet />
       {/* <KeypressEditor /> */}
       <SongSlider />
+      <Helper />
     </>
   );
 }
