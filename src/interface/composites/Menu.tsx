@@ -17,7 +17,7 @@ export function Navbar() {
       <div className="flex gap-2">
         <div className="flex items-center gap-2">
           <h3 className="scroll-m-20 text-lg font-semibold tracking-tight">
-            Assist Games
+            Replay Inspector
           </h3>
           <Badge variant="outline">Editor</Badge>
         </div>
@@ -49,7 +49,7 @@ export function Navbar() {
                 state.setState({ aboutDialog: true });
               }}
             >
-              About Dropout
+              About Inspector
             </MenubarItem>
           </MenubarContent>
         </MenubarMenu>

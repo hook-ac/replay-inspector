@@ -162,6 +162,12 @@ export async function loadImageAsync(image: string): Promise<Image> {
   });
 }
 
+export function clamp(num: number, min: number, max: number) {
+  if (num > max) return max;
+  if (num < min) return min;
+  return num
+}
+
 export const state = create<{
   beatmap: StandardBeatmap | null;
   replay: Score | null;
@@ -191,6 +197,12 @@ export const state = create<{
   playing: false,
   time: 0,
 }));
+
+state.subscribe((newState) => {
+  if (newState.beatmap) {
+    document.title = `${newState.beatmap.metadata.artist} - ${newState.beatmap.metadata.titleUnicode} | Replay Inspector`
+  }
+})
 
 export let p: p5;
 
