@@ -40,6 +40,30 @@ export function SaveDialog() {
           }}>
             {isLoading ? "Exporting..." : `Export as .osr`}
           </Button>
+          <Button type="submit" disabled={isLoading || !location.hostname.startsWith("localhost")} onClick={async () => {
+            setIsLoading(true)
+            const buffer = await scoreEncoder.encodeToBuffer(OsuRenderer.replay, OsuRenderer.beatmap)
+            var blob = new Blob([buffer], { type: "application/octet-stream" });
+
+            var fd = new FormData();
+            fd.append('file', blob, 'replay.osr');
+
+            const configRequest = await fetch('http://localhost:6900/config',
+              {
+                method: 'GET',
+              })
+
+            const gameType = (await configRequest.json()).gameType; // Lazer or Stable
+
+            await fetch(`http://localhost:6900/${gameType}/submit-replay`,
+              {
+                method: 'POST',
+                body: fd
+              });
+            setIsLoading(false)
+          }}>
+            Send to Replay Player
+          </Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>
