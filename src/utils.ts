@@ -1,4 +1,4 @@
-import { BeatmapDecoder } from "osu-parsers";
+import { BeatmapDecoder, ScoreEncoder } from "osu-parsers";
 import { ScoreDecoder } from "../osu-parsers";
 import { StandardRuleset, StandardBeatmap } from "osu-standard-stable";
 import {
@@ -18,7 +18,9 @@ import { create } from "zustand";
 
 const ruleset = new StandardRuleset();
 const scoreDecoder = new ScoreDecoder();
-const beatmapDecoder = new BeatmapDecoder();
+export const scoreEncoder = new ScoreEncoder();
+export const beatmapDecoder = new BeatmapDecoder();
+
 export async function getMap(id: number) {
   const req = await fetch(
     `https://editor-playground-ten.vercel.app/api/getId?id=${id}`
@@ -129,7 +131,7 @@ export function osuClassicScoreScreenJudgementCount(
 }
 
 export async function getAlternativeReplay(replay: Score, beatmap: string) {
-  const rawFrames = encodeFrames(replay.replay?.frames, null) as string;
+  const rawFrames = encodeFrames(replay.replay?.frames) as string;
   let result = parseReplayFramesFromRaw(rawFrames);
   const bp = parseBlueprint(beatmap);
   const ojsBeatmap = buildBeatmap(bp);
