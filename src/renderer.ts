@@ -6,7 +6,7 @@ import { toast } from "sonner";
 
 export class Renderer {
   static mouse: Vector;
-  static OsuRenderer: OsuRenderer = OsuRenderer;
+  static osuRenderer: OsuRenderer = OsuRenderer;
 
   static async setup() {
     Renderer.registerEvents();

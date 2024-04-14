@@ -386,6 +386,22 @@ export class OsuRenderer {
     return cursorPushed;
   }
 
+  public static getVisibleFrames() {
+    const frames = this.replay.replay!.frames as LegacyReplayFrame[];
+    const visibleFrames: LegacyReplayFrame[] = []
+    for (const frame of frames) {
+      if (frame.startTime > this.time) {
+        visibleFrames.push(frame);
+        if (frame.startTime > this.time + this.pathWindow) break;
+      }
+      if (frame.startTime < this.time - this.pathWindow) {
+        continue;
+      }
+      visibleFrames.push(frame);
+    }
+    return visibleFrames
+  }
+
   private static interpolateReplayPosition(
     fA: LegacyReplayFrame,
     fB: LegacyReplayFrame,
