@@ -7,6 +7,24 @@ export class OsuControlHooks {
   @Hook(Events.keyPressed)
   static keyPressed() {
     if (p.keyCode == 32) OsuRenderer.setPlaying(!OsuRenderer.playing);
+
+
+    // Left Arrow
+    if (p.keyCode == 37) {
+      OsuRenderer.setTime(OsuRenderer.time - 25)
+    }
+    // Left Arrow
+    if (p.keyCode == 39) {
+      OsuRenderer.setTime(OsuRenderer.time + 25)
+    }
+    // Q Key
+    if (p.keyCode == 81) {
+      OsuRenderer.pathWindow = p.constrain(OsuRenderer.pathWindow - 50, 100, 2000)
+    }
+    // E Key
+    if (p.keyCode == 69) {
+      OsuRenderer.pathWindow = p.constrain(OsuRenderer.pathWindow + 50, 100, 2000)
+    }
   }
 
   @Hook(Events.mouseWheel)
