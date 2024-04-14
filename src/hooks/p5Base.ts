@@ -7,6 +7,7 @@ import {
   canvasTranslation,
 } from "./canvasControls";
 import { Hook } from "@/decorators/hook";
+import { Tooling } from "./tooling";
 
 export class p5Hooks {
   @Hook(Events.setup)
@@ -35,6 +36,7 @@ export class p5Hooks {
     Renderer.mouse.set(translated);
 
     Renderer.draw();
+    Tooling.tick()
 
     p.translate(-canvasTranslation.x, -canvasTranslation.y);
     p.scale(1 / canvasMultiplier);

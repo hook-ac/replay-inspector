@@ -25,7 +25,6 @@ export class Renderer {
     if (!OsuRenderer.beatmap) return;
 
     OsuRenderer.render();
-    p.circle(this.mouse.x, this.mouse.y, 25);
   }
 
   static registerEvents() {
