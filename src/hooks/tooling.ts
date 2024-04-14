@@ -1,5 +1,6 @@
 import { Hook } from "@/decorators/hook";
 import { Events } from "@/hooks";
+import { OsuRenderer } from "@/osu/OsuRenderer";
 import { BrushTool } from "@/tooling/brush";
 import { Tool } from "@/tooling/tool";
 import { p } from "@/utils";
@@ -21,16 +22,16 @@ export class Tooling {
 
   @Hook(Events.keyPressed)
   static keyPressed() {
-    if (p.key == "1") {
+    if (p.key == "2") {
       Tooling.currentTool = new BrushTool()
     }
-    if (p.key == "2") {
+    if (p.key == "1") {
       Tooling.currentTool = undefined
     }
   }
 
   static tick() {
-    if (!Tooling.currentTool) return;
+    if (!Tooling.currentTool || !OsuRenderer.beatmap || !OsuRenderer.replay) return;
     Tooling.currentTool.tick();
   }
 

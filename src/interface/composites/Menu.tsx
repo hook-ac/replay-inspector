@@ -1,3 +1,4 @@
+import { Tooling } from "@/hooks/tooling";
 import { Badge } from "@/interface/components/ui/badge";
 import {
   Menubar,
@@ -9,6 +10,7 @@ import {
   MenubarTrigger,
 } from "@/interface/components/ui/menubar";
 import { OsuRenderer } from "@/osu/OsuRenderer";
+import { BrushTool } from "@/tooling/brush";
 import { state } from "@/utils";
 export function Navbar() {
   const { beatmap, mods } = state();
@@ -60,20 +62,20 @@ export function Navbar() {
             <MenubarMenu>
               <MenubarTrigger>Tools</MenubarTrigger>
               <MenubarContent>
-                {/* <MenubarItem
+                <MenubarItem
                   onClick={() => {
-                    state.setState({ tool: "cursor" });
+                    Tooling.currentTool = undefined
                   }}
                 >
-                  Cursor <MenubarShortcut>C</MenubarShortcut>
+                  Cursor <MenubarShortcut>1</MenubarShortcut>
                 </MenubarItem>
                 <MenubarItem
                   onClick={() => {
-                    state.setState({ tool: "brush" });
+                    Tooling.currentTool = new BrushTool()
                   }}
                 >
-                  Brush <MenubarShortcut>B</MenubarShortcut>
-                </MenubarItem> */}
+                  Brush <MenubarShortcut>2</MenubarShortcut>
+                </MenubarItem>
                 {/* <MenubarItem
                   onClick={() => {
                     state.setState({ tool: "smoother" });

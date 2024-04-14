@@ -25,6 +25,12 @@ export class OsuControlHooks {
     if (p.keyCode == 69) {
       OsuRenderer.pathWindow = p.constrain(OsuRenderer.pathWindow + 50, 100, 2000)
     }
+    // N Key
+    if (p.keyCode == 78) {
+      setTimeout(() => {
+        state.setState(({ metadataEditorDialog }) => ({ metadataEditorDialog: !metadataEditorDialog }))
+      })
+    }
   }
 
   @Hook(Events.mouseWheel)
