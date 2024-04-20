@@ -60,6 +60,17 @@ export class BrushTool extends Tool {
       }
     }
 
+    p.push()
+    const visibleFrames = OsuRenderer.getVisibleFrames()
+    p.noStroke()
+    for (const frame of visibleFrames) {
+      if (p.dist(frame.position.x, frame.position.y, Renderer.mouse.x, Renderer.mouse.y) < this.brushSize / 2) {
+        p.fill("red")
+        p.circle(frame.position.x, frame.position.y, 1)
+      }
+    }
+    p.pop()
+
     p.circle(Renderer.mouse.x, Renderer.mouse.y, this.brushSize - (this.dragStartHorizontal != null ? this.dragStartHorizontal - Renderer.mouse.x : 0))
   }
 }
