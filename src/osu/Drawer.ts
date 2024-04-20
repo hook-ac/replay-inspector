@@ -150,7 +150,7 @@ export class Drawer {
       }
       g.endShape();
 
-      g.strokeWeight(radius * 2 - 17);
+      g.strokeWeight(radius * 2 - (10 + radius * 0.25));
       g.stroke(10);
       g.beginShape();
       for (const node of path) {
