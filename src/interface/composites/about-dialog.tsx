@@ -18,24 +18,23 @@ export function AboutDialog() {
             Replay Inspector <Badge variant="outline">Editor</Badge>
           </h3>
           <div className="opacity-75">
-            <h3 className="text-sm">Developed by Assist Games</h3>
+            <h3 className="text-sm">Developed by Hook</h3>
           </div>
-
 
           <Button
             variant="outline"
             className="mt-4 mr-2"
             onClick={() => {
-              window.open("https://assist.games");
+              window.open("https://hook.ac");
             }}
           >
-            Assist Games
+            Hook
           </Button>
           <Button
             variant="outline"
             className="mt-4"
             onClick={() => {
-              window.open("https://github.com/cunev");
+              window.open("https://github.com/hook-ac");
             }}
           >
             GitHub
