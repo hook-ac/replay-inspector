@@ -1,8 +1,4 @@
 import {
-  normalizeHitObjects,
-  osuClassicScoreScreenJudgementCount,
-} from "@/utils";
-import {
   Beatmap,
   BucketedGameStateTimeMachine,
   GameState,
@@ -62,11 +58,6 @@ export class GameplayAnalyzer {
       hitWindowStyle: "OSU_STABLE",
     });
     this.state = this.bucket.gameStateAt(1e6);
-
-    const judge = osuClassicScoreScreenJudgementCount(
-      this.state,
-      this.beatmap.hitObjects
-    );
 
     this.renderJudgements = {};
     for (const [objectId, judgement] of Object.entries(

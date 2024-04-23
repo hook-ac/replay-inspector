@@ -15,8 +15,6 @@ import { Vec2 } from "@osujs/math";
 import { clamp, getBeatmap, getId, getMap, getReplay } from "@/utils";
 import EventEmitter from "eventemitter3";
 import { GameplayAnalyzer } from "./GameplayAnalyzer";
-const beatmapDecoder = new BeatmapDecoder();
-const beatmapEncoder = new BeatmapEncoder();
 
 export enum OsuRendererEvents {
   UPDATE = "UPDATE",
@@ -270,7 +268,6 @@ export class OsuRenderer {
 
     if (GameplayAnalyzer.renderJudgements[hitObject.startTime]) {
       Drawer.setDrawingOpacity(opacity / 2);
-      console.log("ye");
       Drawer.drawCircleJudgement(
         hitObject.stackedStartPosition,
         hitObject.radius,
@@ -423,6 +420,8 @@ export class OsuRenderer {
     beatmap: StandardBeatmap,
     mods: StandardModCombination
   ) {
+    const beatmapDecoder = new BeatmapDecoder();
+    const beatmapEncoder = new BeatmapEncoder();
     const ruleset = new StandardRuleset();
 
     const bp = beatmapDecoder.decodeFromString(
