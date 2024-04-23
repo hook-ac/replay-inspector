@@ -1,6 +1,5 @@
 import { Hook } from "@/decorators/hook";
 import { Events } from "@/hooks";
-import { GameplayAnalyzer } from "@/osu/GameplayAnalyzer";
 import { OsuRenderer } from "@/osu/OsuRenderer";
 import { BrushTool } from "@/tooling/brush";
 import { Tool } from "@/tooling/tool";

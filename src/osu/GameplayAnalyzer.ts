@@ -5,6 +5,9 @@ import {
 import {
   Beatmap,
   BucketedGameStateTimeMachine,
+  GameState,
+  HitCircle,
+  HitCircleVerdict,
   OsuAction,
   ReplayFrame,
   buildBeatmap,
@@ -16,20 +19,22 @@ import { StandardBeatmap } from "osu-standard-stable";
 const beatmapEncoder = new BeatmapEncoder();
 
 export class GameplayAnalyzer {
-  private static objectDictionary: any;
   private static beatmap: Beatmap;
   private static bucket: BucketedGameStateTimeMachine;
-  private static lastHits = [0, 0, 0, 0];
+  private static state: GameState;
+
+  public static renderJudgements: Record<number, HitCircleVerdict["type"]> = {};
 
   static async refreshMap(beatmap: StandardBeatmap, score: Score) {
     // Completely tranforming to another format in order to analyze using @osujs/core
     // TODO: refactor to not reparse everything, but modify frames and stuff inplace.
+    // TODO: optimize time-wise, currently eats up 70~ ish ms on large maps
 
     const beatmapRaw = await beatmapEncoder.encodeToString(beatmap);
 
     const extFrames: ReplayFrame[] = [
-      { time: 565, actions: [0], position: { x: 0, y: 0 } },
-      { time: 585, actions: [], position: { x: 0, y: 0 } },
+      { time: 0, actions: [0], position: { x: 0, y: 0 } },
+      { time: 0, actions: [], position: { x: 0, y: 0 } },
     ];
 
     (score.replay?.frames as LegacyReplayFrame[]).forEach((frame) => {
@@ -51,23 +56,26 @@ export class GameplayAnalyzer {
 
     const bp = parseBlueprint(beatmapRaw);
     this.beatmap = buildBeatmap(bp);
-    console.time();
-
-    this.lastHits = [0, 0, 0, 0];
-    this.objectDictionary = normalizeHitObjects(this.beatmap.hitObjects);
 
     this.bucket = new BucketedGameStateTimeMachine(extFrames, this.beatmap, {
       noteLockStyle: "STABLE",
       hitWindowStyle: "OSU_STABLE",
     });
-    const state = this.bucket.gameStateAt(1e6);
+    this.state = this.bucket.gameStateAt(1e6);
 
     const judge = osuClassicScoreScreenJudgementCount(
-      state,
+      this.state,
       this.beatmap.hitObjects
     );
-    console.timeEnd();
 
-    console.log(judge);
+    this.renderJudgements = {};
+    for (const [objectId, judgement] of Object.entries(
+      this.state.hitCircleVerdict
+    )) {
+      const object = this.beatmap.getHitObject(objectId);
+      if (object instanceof HitCircle) {
+        this.renderJudgements[object.hitTime] = judgement.type;
+      }
+    }
   }
 }

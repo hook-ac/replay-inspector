@@ -12,14 +12,7 @@ import {
 } from "osu-standard-stable";
 import { Drawer } from "./Drawer";
 import { Vec2 } from "@osujs/math";
-import {
-  clamp,
-  getBeatmap,
-  getId,
-  getMap,
-  getReplay,
-  scoreEncoder,
-} from "@/utils";
+import { clamp, getBeatmap, getId, getMap, getReplay } from "@/utils";
 import EventEmitter from "eventemitter3";
 import { GameplayAnalyzer } from "./GameplayAnalyzer";
 const beatmapDecoder = new BeatmapDecoder();
@@ -275,15 +268,15 @@ export class OsuRenderer {
       hitObject.currentComboIndex
     );
 
-    // if (GameplayAnalyzer.renderJudgements[hitObject.startTime]) {
-    //   Drawer.setDrawingOpacity(opacity / 2);
-
-    //   Drawer.drawCircleJudgement(
-    //     hitObject.stackedStartPosition,
-    //     hitObject.radius,
-    //     GameplayAnalyzer.renderJudgements[hitObject.startTime]
-    //   );
-    // }
+    if (GameplayAnalyzer.renderJudgements[hitObject.startTime]) {
+      Drawer.setDrawingOpacity(opacity / 2);
+      console.log("ye");
+      Drawer.drawCircleJudgement(
+        hitObject.stackedStartPosition,
+        hitObject.radius,
+        GameplayAnalyzer.renderJudgements[hitObject.startTime]
+      );
+    }
     Drawer.endDrawing();
     return arScale;
   }
