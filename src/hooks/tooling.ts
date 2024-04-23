@@ -10,7 +10,9 @@ export class Tooling {
 
   @Hook(Events.mousePressed)
   static mousePressed() {
-    if (!Tooling.currentTool) return;
+    const overElements = document.querySelectorAll( ":hover" );
+    const isOverCanvas = overElements[overElements.length-1].id.includes("defaultCanvas")
+    if (!Tooling.currentTool || !isOverCanvas) return;
     Tooling.currentTool.mousePressed();
   }
 
