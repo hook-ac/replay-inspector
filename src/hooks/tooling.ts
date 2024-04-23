@@ -1,5 +1,6 @@
 import { Hook } from "@/decorators/hook";
 import { Events } from "@/hooks";
+import { GameplayAnalyzer } from "@/osu/GameplayAnalyzer";
 import { OsuRenderer } from "@/osu/OsuRenderer";
 import { BrushTool } from "@/tooling/brush";
 import { Tool } from "@/tooling/tool";
@@ -10,8 +11,9 @@ export class Tooling {
 
   @Hook(Events.mousePressed)
   static mousePressed() {
-    const overElements = document.querySelectorAll( ":hover" );
-    const isOverCanvas = overElements[overElements.length-1].id.includes("defaultCanvas")
+    const overElements = document.querySelectorAll(":hover");
+    const isOverCanvas =
+      overElements[overElements.length - 1].id.includes("defaultCanvas");
     if (!Tooling.currentTool || !isOverCanvas) return;
     Tooling.currentTool.mousePressed();
   }
@@ -25,15 +27,16 @@ export class Tooling {
   @Hook(Events.keyPressed)
   static keyPressed() {
     if (p.key == "2") {
-      Tooling.currentTool = new BrushTool()
+      Tooling.currentTool = new BrushTool();
     }
     if (p.key == "1") {
-      Tooling.currentTool = undefined
+      Tooling.currentTool = undefined;
     }
   }
 
   static tick() {
-    if (!Tooling.currentTool || !OsuRenderer.beatmap || !OsuRenderer.replay) return;
+    if (!Tooling.currentTool || !OsuRenderer.beatmap || !OsuRenderer.replay)
+      return;
     Tooling.currentTool.tick();
   }
 

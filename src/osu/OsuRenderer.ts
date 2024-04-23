@@ -12,8 +12,18 @@ import {
 } from "osu-standard-stable";
 import { Drawer } from "./Drawer";
 import { Vec2 } from "@osujs/math";
-import { clamp, getBeatmap, getId, getMap, getReplay } from "@/utils";
+import {
+  clamp,
+  getBeatmap,
+  getId,
+  getMap,
+  getReplay,
+  scoreEncoder,
+} from "@/utils";
 import EventEmitter from "eventemitter3";
+import { GameplayAnalyzer } from "./GameplayAnalyzer";
+const beatmapDecoder = new BeatmapDecoder();
+const beatmapEncoder = new BeatmapEncoder();
 
 export enum OsuRendererEvents {
   UPDATE = "UPDATE",
@@ -119,7 +129,7 @@ export class OsuRenderer {
     }
 
     this.beatmap = this.recreateBeatmap(tempClone, sendMods);
-    // GameplayAnalyzer.createBucket(this.replay, this.beatmap);
+    GameplayAnalyzer.refreshMap(this.beatmap, this.replay);
 
     let fadeIn = 0;
     let preempt = 0;
@@ -388,7 +398,7 @@ export class OsuRenderer {
 
   public static getVisibleFrames() {
     const frames = this.replay.replay!.frames as LegacyReplayFrame[];
-    const visibleFrames: LegacyReplayFrame[] = []
+    const visibleFrames: LegacyReplayFrame[] = [];
     for (const frame of frames) {
       if (frame.startTime > this.time) {
         visibleFrames.push(frame);
@@ -399,7 +409,7 @@ export class OsuRenderer {
       }
       visibleFrames.push(frame);
     }
-    return visibleFrames
+    return visibleFrames;
   }
 
   private static interpolateReplayPosition(
@@ -420,8 +430,6 @@ export class OsuRenderer {
     beatmap: StandardBeatmap,
     mods: StandardModCombination
   ) {
-    const beatmapDecoder = new BeatmapDecoder();
-    const beatmapEncoder = new BeatmapEncoder();
     const ruleset = new StandardRuleset();
 
     const bp = beatmapDecoder.decodeFromString(
