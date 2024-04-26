@@ -36,7 +36,9 @@ export class Tooling {
   static tick() {
     if (!Tooling.currentTool || !OsuRenderer.beatmap || !OsuRenderer.replay)
       return;
+    p.push();
     Tooling.currentTool.tick();
+    p.pop();
   }
 
   static purge() {
