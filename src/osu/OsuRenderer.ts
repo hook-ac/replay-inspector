@@ -306,6 +306,16 @@ export class OsuRenderer {
       hitObject.currentComboIndex
     );
 
+    if (GameplayAnalyzer.renderJudgements[hitObject.startTime]) {
+      Drawer.setDrawingOpacity(opacity / 2);
+      Drawer.drawCircleJudgement(
+        hitObject.stackedStartPosition,
+        hitObject.radius,
+        GameplayAnalyzer.renderJudgements[hitObject.startTime],
+        hitObject.startTime
+      );
+    }
+
     let progress = (this.time - hitObject.startTime) / hitObject.duration;
     let position = hitObject.stackedStartPosition.add(
       hitObject.path.curvePositionAt(progress, hitObject.repeats + 1)

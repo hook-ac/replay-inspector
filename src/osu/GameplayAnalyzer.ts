@@ -6,13 +6,14 @@ import {
   HitCircleVerdict,
   OsuAction,
   ReplayFrame,
+  Slider,
+  Spinner,
   buildBeatmap,
   parseBlueprint,
 } from "@osujs/core";
 import { LegacyReplayFrame, Score } from "osu-classes";
 import { BeatmapEncoder } from "osu-parsers";
 import { StandardBeatmap } from "osu-standard-stable";
-import { OsuRenderer } from "./OsuRenderer";
 const beatmapEncoder = new BeatmapEncoder();
 
 export class GameplayAnalyzer {
@@ -77,6 +78,9 @@ export class GameplayAnalyzer {
       const object = this.beatmap.getHitObject(objectId);
       if (object instanceof HitCircle) {
         this.renderJudgements[object.hitTime] = judgement.type;
+      }
+      if (object instanceof Slider || object instanceof Spinner) {
+        this.renderJudgements[object.startTime] = judgement.type;
       }
     }
   }
