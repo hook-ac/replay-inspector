@@ -2,6 +2,8 @@ import { Vector2 } from "osu-classes";
 import { Md5 } from "ts-md5";
 import p5 from "p5";
 import { loadImageAsync } from "@/utils";
+import { OsuRenderer } from "./OsuRenderer";
+import { GameplayAnalyzer } from "./GameplayAnalyzer";
 
 export class Drawer {
   private static imageCache: Record<string, p5.Graphics> = {};
@@ -49,21 +51,33 @@ export class Drawer {
   static drawCircleJudgement(
     position: Vector2,
     radius: number,
-    judgement: string
+    judgement: string,
+    time: number
   ) {
+    const rate = time / OsuRenderer.replay.replay!.length;
+
     Drawer.p.push();
     Drawer.p.strokeWeight(2);
     if (judgement === "OK") {
       Drawer.p.stroke(`rgb(106, 176, 76)`);
       Drawer.p.fill(`rgb(106, 176, 76)`);
+      GameplayAnalyzer.ctx.rect(rate * 1000, 0, 2, 8);
+      GameplayAnalyzer.ctx.fillStyle = "rgb(241, 196, 15)";
+      GameplayAnalyzer.ctx.fill();
     }
     if (judgement === "MEH") {
       Drawer.p.stroke(`rgb(241, 196, 15)`);
       Drawer.p.fill(`rgb(241, 196, 15)`);
+      GameplayAnalyzer.ctx.rect(rate * 1000, 0, 2, 8);
+      GameplayAnalyzer.ctx.fillStyle = "rgb(241, 196, 15)";
+      GameplayAnalyzer.ctx.fill();
     }
     if (judgement === "MISS") {
       Drawer.p.stroke(`rgb(231, 76, 60)`);
       Drawer.p.fill(`rgb(231, 76, 60)`);
+      GameplayAnalyzer.ctx.rect(rate * 1000, 0, 2, 8);
+      GameplayAnalyzer.ctx.fillStyle = "rgb(231, 76, 60)";
+      GameplayAnalyzer.ctx.fill();
     }
     if (judgement !== "GREAT") {
       Drawer.p.circle(position.x, position.y, radius * 2);

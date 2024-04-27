@@ -16,13 +16,15 @@ export function SongSlider() {
         <div className="flex flex-col items-start w-full ">
           <p className="text-sm opacity-50">Current time</p>
           <p>{new Date(time).toISOString().slice(11, 19)}</p>
-
         </div>
         <div className="flex gap-2 w-full justify-center">
-          <Button variant="outline" size="icon"
+          <Button
+            variant="outline"
+            size="icon"
             onClick={() => {
               OsuRenderer.setTime(OsuRenderer.time - 1000);
-            }}>
+            }}
+          >
             <ArrowLeft />
           </Button>
           <Button
@@ -34,27 +36,36 @@ export function SongSlider() {
           >
             {playing ? <PauseIcon /> : <PlayIcon />}
           </Button>
-          <Button variant="outline" size="icon"
+          <Button
+            variant="outline"
+            size="icon"
             onClick={() => {
               OsuRenderer.setTime(OsuRenderer.time + 1000);
-            }}>
+            }}
+          >
             <ArrowRight />
           </Button>
         </div>
         <div className="flex w-full justify-end"></div>
-
       </div>
 
-
-      <Slider
-        step={10}
-        min={0}
-        max={replay.replay?.length}
-        value={[time]}
-        onValueChange={(value: any) => {
-          OsuRenderer.setTime(value[0]);
-        }}
-      />
+      <div className="relative w-full">
+        <Slider
+          step={10}
+          min={0}
+          max={replay.replay?.length}
+          value={[time]}
+          onValueChange={(value: any) => {
+            OsuRenderer.setTime(value[0]);
+          }}
+        />
+        <canvas
+          className="absolute w-full h-full top-0 pointer-events-none"
+          height={8}
+          width={"1000"}
+          id="timelineCanvas"
+        ></canvas>
+      </div>
     </Card>
   );
 }

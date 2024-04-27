@@ -12,6 +12,7 @@ import {
 import { LegacyReplayFrame, Score } from "osu-classes";
 import { BeatmapEncoder } from "osu-parsers";
 import { StandardBeatmap } from "osu-standard-stable";
+import { OsuRenderer } from "./OsuRenderer";
 const beatmapEncoder = new BeatmapEncoder();
 
 export class GameplayAnalyzer {
@@ -20,6 +21,8 @@ export class GameplayAnalyzer {
   private static state: GameState;
 
   public static renderJudgements: Record<number, HitCircleVerdict["type"]> = {};
+
+  public static ctx: any;
 
   static async refreshMap(beatmap: StandardBeatmap, score: Score) {
     // Completely tranforming to another format in order to analyze using @osujs/core
@@ -58,6 +61,14 @@ export class GameplayAnalyzer {
       hitWindowStyle: "OSU_STABLE",
     });
     this.state = this.bucket.gameStateAt(1e6);
+
+    setTimeout(() => {
+      const canvas = document.getElementById(
+        "timelineCanvas"
+      )! as HTMLCanvasElement;
+      this.ctx = canvas.getContext("2d")!;
+      this.ctx.clearRect(0, 0, canvas.width, canvas.height);
+    });
 
     this.renderJudgements = {};
     for (const [objectId, judgement] of Object.entries(

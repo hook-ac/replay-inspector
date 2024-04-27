@@ -271,7 +271,8 @@ export class OsuRenderer {
       Drawer.drawCircleJudgement(
         hitObject.stackedStartPosition,
         hitObject.radius,
-        GameplayAnalyzer.renderJudgements[hitObject.startTime]
+        GameplayAnalyzer.renderJudgements[hitObject.startTime],
+        hitObject.startTime
       );
     }
     Drawer.endDrawing();
